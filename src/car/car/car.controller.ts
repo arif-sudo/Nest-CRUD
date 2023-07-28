@@ -7,7 +7,7 @@ import { Car } from 'src/interfaces/car.interface';
 export class CarController {
   constructor(private carsService: CarService) {}
   @Post()
-  createCar(@Body() createCarDto: CreateCarDto) {
+  async createCar(@Body() createCarDto: CreateCarDto) {
     return this.carsService.createCar(createCarDto);
   }
   @Get()
