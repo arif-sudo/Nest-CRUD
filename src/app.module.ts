@@ -20,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
       autoLoadModels: true,
       synchronize: true,
       dialectOptions: {
+        timezone: '+04:00', 
         ssl: {
           require: true,
           rejectUnauthorized: false
