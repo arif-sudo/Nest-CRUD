@@ -9,4 +9,8 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+  @Get('/language')
+  getProgLang(): string {
+    return this.appService.getProg();
+  }
 }
