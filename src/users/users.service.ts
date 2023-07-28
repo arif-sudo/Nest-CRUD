@@ -10,24 +10,32 @@ export class UsersService {
 
   constructor(@InjectModel(User) private userRepository: typeof User) { }
 
-  create(createUserDto: CreateUserDto) {
-    return `This action adds a new user ${createUserDto}`;
+  async create(createUserDto: CreateUserDto) {
+    const user = await this.userRepository.create(createUserDto);
+    return user;
+
   }
 
   async findAll() {
     const users = await this.userRepository.findAll({ include: { all: true } });
-    return users
+    return users;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    const user = await this.userRepository.findOne({ where: { id: id } });
+    return user;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user -- ${updateUserDto}`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.findOne({ where: { id: id } });
+    console.log(updateUserDto, 'update dto aloo');
+    const updatedUser = await user.update(updateUserDto);
+    return updatedUser;
+
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const user = await this.userRepository.destroy({ where: { id: id } });
+    return user;
   }
 }
