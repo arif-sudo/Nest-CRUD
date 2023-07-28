@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CarService } from './car.service';
 import { CreateCarDto } from 'src/dto/createcar-dto';
-// import { Car } from 'src/interfaces/car.interface';
+import { Car } from 'src/interfaces/car.interface';
 
 @Controller('cars')
 export class CarController {
@@ -11,7 +11,7 @@ export class CarController {
     return this.carsService.createCar(createCarDto);
   }
   @Get()
-  findAll() {
+  async findAll(): Promise<Car[]> {
     return this.carsService.findAll();
   }
 }
