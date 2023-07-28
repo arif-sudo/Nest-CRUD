@@ -3,19 +3,29 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CarModule } from './car/car/car.module';
 import { UsersModule } from './users/users.module';
-
+import { User } from './users/users.model';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from '@nestjs/config';
+
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: '.env' }),
+    ConfigModule.forRoot({ isGlobal: true /* envFilePath: '.env'*/ }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.PGHOST,
       username: process.env.PGUSER,
       password: process.env.PGPASSWORD,
       database: process.env.PGDATABASE,
-      ssl: true,
+      models: [User],
+      autoLoadModels: true,
+      synchronize: true,
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false
+        }
+      },
+
     }),
     CarModule,
     UsersModule,
@@ -23,4 +33,4 @@ import { ConfigModule } from '@nestjs/config';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
