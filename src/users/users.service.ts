@@ -10,23 +10,23 @@ export class UsersService {
 
   constructor(@InjectModel(User) private userRepository: typeof User) { }
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<User | undefined> {
     const user = await this.userRepository.create(createUserDto);
     return user;
 
   }
 
-  async findAll() {
+  async findAll(): Promise<User[] | undefined> {
     const users = await this.userRepository.findAll({ include: { all: true } });
     return users;
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<User | undefined> {
     const user = await this.userRepository.findOne({ where: { id: id } });
     return user;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<User | undefined> {
     const user = await this.userRepository.findOne({ where: { id: id } });
     console.log(updateUserDto, 'update dto aloo');
     const updatedUser = await user.update(updateUserDto);
@@ -34,8 +34,7 @@ export class UsersService {
 
   }
 
-  async remove(id: number) {
-    const user = await this.userRepository.destroy({ where: { id: id } });
-    return user;
+  async remove(id: number): Promise<void | undefined> {
+    await this.userRepository.destroy({ where: { id: id } });
   }
 }
