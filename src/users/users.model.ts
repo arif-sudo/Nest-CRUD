@@ -11,7 +11,7 @@ export class User extends Model<User, UserCreationAttrs>{
     id: number;
 
     @Column({ type: DataType.STRING, allowNull: false })
-    firstName: string;
+    username: string;
 
     @Column({ type: DataType.STRING, allowNull: false })
     email: string

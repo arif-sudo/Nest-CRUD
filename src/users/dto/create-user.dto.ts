@@ -1,4 +1,4 @@
-import { IsEmail, IsString, MinLength, MaxLength } from '@nestjs/class-validator'
+import { IsEmail, IsString, Length } from '@nestjs/class-validator'
 
 export class CreateUserDto {
     @IsEmail({}, { message: 'Wrong email!' })
@@ -6,7 +6,7 @@ export class CreateUserDto {
     readonly email: string;
 
     @IsString({message: 'Should be a string'})
-    @MinLength(8, {message: 'Should be 8 and more chars'})
-    @MaxLength(16, {message: 'Should be less  16 and less chars'})
+    @Length(8 ,16, {message: 'Should be from 8 to 16 chars'})
     readonly password: string;
 }
+    
