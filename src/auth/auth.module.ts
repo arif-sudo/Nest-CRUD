@@ -6,6 +6,7 @@ import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt'
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './auth.jwt-strategy';
+import { AuthController } from './auth.controller';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { JwtStrategy } from './auth.jwt-strategy';
     })
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
-  controllers: [],
-  exports: [AuthService]
+  controllers: [AuthController],
+  exports: []
 })
 export class AuthModule { }

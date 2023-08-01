@@ -5,8 +5,11 @@ export class CreateUserDto {
     @IsString({message: "Should be string"})
     readonly email: string;
 
+    @IsString({message: "Should be string"})
+    readonly username: string;
+
     @IsString({message: 'Should be a string'})
     @Length(8 ,16, {message: 'Should be from 8 to 16 chars'})
-    readonly password: string;
+    readonly password : string;
 }
     
